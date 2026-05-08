@@ -37,7 +37,7 @@ fun Login() {
             horizontalAlignment = Alignment.CenterHorizontally
         ){
             LoginHeader()
-            Spacer(modifier = Modifier.height(137.dp))
+            Spacer(modifier = Modifier.height(85.dp))
             LoginSection()
             Spacer(modifier = Modifier.weight(1f))
             NoteMarkRectangle(
@@ -75,21 +75,13 @@ fun LoginHeader() {
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         Text(
-            text = "Login",
-            style = MaterialTheme.typography.displayLarge,
+            text = "Welcome back! Please login to your account",
+            style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Medium,
-            textAlign = TextAlign.Left,
+            textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth(0.85f)
         )
-        Spacer(modifier = Modifier.height(15.dp))
-        Canvas(modifier = Modifier.fillMaxWidth()){
-            drawLine(
-                color = outsideRectangle,
-                start = Offset(size.width * 0.45f, 0f),
-                end = Offset(size.width * 0.55f, 0f),
-                strokeWidth = 10f
-            )
-        }
+
     }
 }
 

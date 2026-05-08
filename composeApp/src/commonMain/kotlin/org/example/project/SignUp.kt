@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.example.project.theme.elements.NoteMarkField
@@ -35,7 +36,7 @@ fun SignUp() {
             horizontalAlignment = Alignment.CenterHorizontally
         ){
             SignUpHeader()
-            Spacer(modifier = Modifier.height(80.dp))
+            Spacer(modifier = Modifier.height(75.dp))
             SignUpSection()
             Spacer(modifier = Modifier.weight(1f))
             NoteMarkRectangle(
@@ -73,19 +74,13 @@ fun SignUpHeader() {
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         Text(
-            text = "Register",
-            style = MaterialTheme.typography.displayLarge,
-            fontWeight = FontWeight.Medium
+            text = "Welcome! Please register to get started",
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Medium,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth(0.85f)
         )
-        Spacer(modifier = Modifier.height(15.dp))
-        Canvas(modifier = Modifier.fillMaxWidth()){
-            drawLine(
-                color = outsideRectangle,
-                start = Offset(size.width * 0.45f, 0f),
-                end = Offset(size.width * 0.55f, 0f),
-                strokeWidth = 10f
-            )
-        }
+
     }
 }
 

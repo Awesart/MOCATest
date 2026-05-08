@@ -32,7 +32,7 @@ fun NoteMarkRoundedButton(
     ) {
         Text(
             text = text,
-            style = MaterialTheme.typography.displaySmall,
+            style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Medium
 
             )

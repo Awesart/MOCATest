@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 fun App() {
     MaterialTheme {
         Surface{
-            Login()
+            Home()
         }
     }
 }
