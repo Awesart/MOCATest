@@ -1,6 +1,5 @@
-package org.example.project
+package org.example.project.commonUI.auth
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -15,29 +14,30 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.example.project.theme.elements.NoteMarkRoundedButton
 import org.example.project.theme.elements.NoteMarkField
 import org.example.project.theme.elements.NoteMarkRectangle
-import org.example.project.theme.elements.NoteMarkRoundedButton
 import org.example.project.theme.elements.NoteMarkTextButton
-import org.example.project.theme.outsideRectangle
 
-@Preview
+
 @Composable
-fun SignUp() {
+fun Login(
+    onLoginClick: () -> Unit,
+    onSignUpClick: () -> Unit
+) {
 
     Surface{
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ){
-            SignUpHeader()
-            Spacer(modifier = Modifier.height(75.dp))
-            SignUpSection()
+            LoginHeader()
+            Spacer(modifier = Modifier.height(85.dp))
+            LoginSection(onLoginClick, onSignUpClick)
             Spacer(modifier = Modifier.weight(1f))
             NoteMarkRectangle(
                 190f,
@@ -57,7 +57,7 @@ fun SignUp() {
 }
 
 @Composable
-fun SignUpHeader() {
+fun LoginHeader() {
 
     NoteMarkRectangle(
         -7f,
@@ -74,7 +74,7 @@ fun SignUpHeader() {
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         Text(
-            text = "Welcome! Please register to get started",
+            text = "Welcome back! Please login to your account",
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Medium,
             textAlign = TextAlign.Center,
@@ -85,22 +85,27 @@ fun SignUpHeader() {
 }
 
 @Composable
-fun SignUpSection() {
+fun LoginSection(
+    onLoginClick: () -> Unit,
+    onSignUpClick: () -> Unit
+) {
     Column (
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth(0.85f)
     ){
-        NoteMarkField("Name", "Name", false)
         NoteMarkField("Username", "Username", false)
         NoteMarkField("Password", "Password", true)
         Spacer(modifier = Modifier.height(10.dp))
         NoteMarkRoundedButton(
-            ::placeHolderFunction,
-            "Sign up ",
+            onLoginClick,
+            "Login",
             modifier = Modifier.align(Alignment.CenterHorizontally)
                 .fillMaxWidth(.8f))
-
+        NoteMarkTextButton(
+            onSignUpClick,
+            "Don't Have an account?"
+            )
     }
 
 

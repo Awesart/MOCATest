@@ -1,4 +1,4 @@
-package org.example.project
+package org.example.project.commonUI.auth
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,18 +16,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.example.project.theme.elements.NoteMarkRectangle
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.font.FontWeight
-import loginscreentest.composeapp.generated.resources.Res
 import org.example.project.theme.descriptionColor
 import org.example.project.theme.elements.NoteMarkRoundedButton
 
-@Preview
+
 @Composable
-fun Home()
+fun Home(
+    onLoginClick: () -> Unit,
+    onSignUpClick: ()-> Unit
+)
 {
     Surface {
         Column(
@@ -48,7 +49,7 @@ fun Home()
             Spacer(modifier = Modifier.fillMaxHeight(0.3f))
             HomeHeader()
             Spacer(modifier = Modifier.height(85.dp))
-            HomeSection()
+            HomeSection(onLoginClick, onSignUpClick)
             Spacer(modifier = Modifier.weight(1f))
 
             NoteMarkRectangle(
@@ -99,7 +100,10 @@ fun HomeHeader()
 }
 
 @Composable
-fun HomeSection(){
+fun HomeSection(
+    onLoginClick: () -> Unit,
+    onSignUpClick: ()-> Unit
+){
 
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -107,12 +111,12 @@ fun HomeSection(){
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ){
         NoteMarkRoundedButton(
-            ::placeHolderFunction,
+            onClick = onSignUpClick,
             "Get Started"
             )
 
         NoteMarkRoundedButton(
-            ::placeHolderFunction,
+            onClick = onLoginClick,
             "Log in"
         )
     }
