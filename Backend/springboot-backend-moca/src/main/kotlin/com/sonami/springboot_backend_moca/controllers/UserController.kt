@@ -1,5 +1,8 @@
-package com.sonami.springboot_backend_moca
+package com.sonami.springboot_backend_moca.controllers
 
+import com.sonami.springboot_backend_moca.dto.UserDto
+import com.sonami.springboot_backend_moca.service.UserService
+import com.sonami.springboot_backend_moca.toEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -17,7 +20,7 @@ class UserController (
     fun getUser(
         userDto: UserDto
     ){
-        userService.getUser(userDto.id)
+        userService.getUser(userDto)
     }
 
     @PostMapping
@@ -27,18 +30,7 @@ class UserController (
         userService.addUser(userDto)
     }
 
-    @PutMapping
-    fun updateUser(
-        userDto: UserDto
-    ){
-        userService.updateUser(userDto)
-    }
 
-    @DeleteMapping
-    fun deleteUser(
-        userDto: UserDto
-    ){
-        userService.deleteUser(userDto.id)
-    }
+
 
 }

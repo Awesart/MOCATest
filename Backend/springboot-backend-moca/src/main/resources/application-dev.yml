@@ -2,3 +2,7 @@
 spring:
   application:
     version: 1.0.0-dev
+
+  jpa:
+    hibernate:
+      ddl-auto: update
