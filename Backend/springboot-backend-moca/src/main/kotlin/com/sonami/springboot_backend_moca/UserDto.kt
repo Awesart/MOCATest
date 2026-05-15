@@ -1,7 +1,7 @@
 package com.sonami.springboot_backend_moca
 
 
-data class User (
+data class UserDto (
     val id : Long,
     val username : String,
     val password : String,
