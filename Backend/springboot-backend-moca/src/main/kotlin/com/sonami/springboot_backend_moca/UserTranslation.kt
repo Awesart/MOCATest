@@ -1,8 +1,9 @@
 package com.sonami.springboot_backend_moca
 
 import com.sonami.springboot_backend_moca.dto.UserDto
+import com.sonami.springboot_backend_moca.models.UserEntity
 
-fun UserDto.toEntity() : UserEntity{
+fun UserDto.toEntity() : UserEntity {
     return UserEntity(
         username = this.username,
         password = this.password,

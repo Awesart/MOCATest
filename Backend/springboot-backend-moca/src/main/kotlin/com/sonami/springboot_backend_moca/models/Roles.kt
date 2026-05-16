@@ -1,4 +1,4 @@
-package com.sonami.springboot_backend_moca
+package com.sonami.springboot_backend_moca.models
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -8,19 +8,12 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 
 @Entity
-@Table(name = "users")
-data class UserEntity (
+@Table(name = "roles")
+data class Roles (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id : Long = 0,
 
     @Column(nullable = false)
-    val username : String,
-
-    @Column(nullable = false)
-    val password : String,
-
-    @Column(nullable = false)
-    val email : String
-
+    val name : String
 )

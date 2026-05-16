@@ -1,6 +1,6 @@
 package com.sonami.springboot_backend_moca.repository
 
-import com.sonami.springboot_backend_moca.UserEntity
+import com.sonami.springboot_backend_moca.models.UserEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.repository.CrudRepository
 import org.springframework.data.repository.query.Param
