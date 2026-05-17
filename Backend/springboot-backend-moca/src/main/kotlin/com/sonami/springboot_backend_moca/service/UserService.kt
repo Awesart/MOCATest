@@ -1,7 +1,7 @@
 package com.sonami.springboot_backend_moca.service
 
 import com.sonami.springboot_backend_moca.dto.UserDto
-import com.sonami.springboot_backend_moca.UserNotFoundException
+import com.sonami.springboot_backend_moca.exceptions.UserNotFoundException
 import com.sonami.springboot_backend_moca.repository.UserRepository
 import com.sonami.springboot_backend_moca.repository.findOne
 import com.sonami.springboot_backend_moca.toDTO

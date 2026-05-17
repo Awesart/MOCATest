@@ -1,4 +1,4 @@
-package com.sonami.springboot_backend_moca
+package com.sonami.springboot_backend_moca.exceptions
 
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
