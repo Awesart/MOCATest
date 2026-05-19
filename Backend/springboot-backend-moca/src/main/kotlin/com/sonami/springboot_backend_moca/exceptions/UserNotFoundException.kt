@@ -6,7 +6,6 @@ class UserNotFoundException (
     "A user with $id is not found."
 )
 
-class UserNotFoundExceptionNoID (
-): RuntimeException(
+class UserNotFoundExceptionNoID : RuntimeException(
     "User cannot be not found."
 )
