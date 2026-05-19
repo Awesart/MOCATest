@@ -11,23 +11,22 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.JoinTable
 import jakarta.persistence.ManyToMany
 import jakarta.persistence.Table
-import org.hibernate.boot.models.annotations.spi.ColumnDetails
 
 @Entity
 @Table(name = "users")
 data class UserEntity (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id : Long = 0,
+    val id: Long = 0,
 
     @Column(nullable = false)
-    val username : String,
+    val username: String,
 
     @Column(nullable = false)
-    val password : String,
+    val password: String?,
 
     @Column(nullable = false)
-    val email : String,
+    val email: String,
 
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])

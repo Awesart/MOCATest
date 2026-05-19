@@ -28,7 +28,7 @@ class SecurityConfig (
         http{
             csrf{disable()}
             authorizeHttpRequests{
-                authorize("/login", permitAll)
+                authorize("/auth/**", permitAll)
                 authorize(anyRequest, authenticated)
             }
             httpBasic{ }

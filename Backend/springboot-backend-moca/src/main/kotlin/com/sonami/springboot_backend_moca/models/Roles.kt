@@ -15,5 +15,5 @@ data class Roles (
     val id : Long = 0,
 
     @Column(nullable = false)
-    val name : String
+    val name : String = ""
 )
