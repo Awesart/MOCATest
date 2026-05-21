@@ -6,5 +6,4 @@ import javax.crypto.SecretKey
 
 object SecurityConstants {
     const val JWT_EXPIRATION = 70_000
-    val secretKey: SecretKey = Jwts.SIG.HS256.key().build()
 }

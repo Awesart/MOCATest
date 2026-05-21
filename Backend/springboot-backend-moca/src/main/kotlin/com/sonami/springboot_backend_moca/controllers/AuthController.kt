@@ -1,16 +1,18 @@
 package com.sonami.springboot_backend_moca.controllers
 
+import com.sonami.springboot_backend_moca.dto.AuthDto
 import com.sonami.springboot_backend_moca.dto.LoginRequest
 import com.sonami.springboot_backend_moca.dto.RegisterDto
 import com.sonami.springboot_backend_moca.models.Roles
 import com.sonami.springboot_backend_moca.models.UserEntity
 import com.sonami.springboot_backend_moca.repository.RoleRepository
 import com.sonami.springboot_backend_moca.repository.UserRepository
-import org.apache.coyote.Response
+import com.sonami.springboot_backend_moca.security.JWTGenerator
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.PostMapping
@@ -24,22 +26,28 @@ class AuthController (
     private val authenticationManager: AuthenticationManager,
     private val passwordEncoder: PasswordEncoder,
     private val userRepository: UserRepository,
-    private val roleRepository: RoleRepository
+    private val roleRepository: RoleRepository,
+    private val jwtGenerator: JWTGenerator
 ){
 
     @PostMapping("/login")
     fun login(
         @RequestBody loginRequest: LoginRequest
-    ): ResponseEntity<String> {
+    ): ResponseEntity<AuthDto> {
+
         val authenticationRequest = UsernamePasswordAuthenticationToken.unauthenticated(
             loginRequest.username, loginRequest.password
         )
 
-        val authenticationResponse = authenticationManager.authenticate(authenticationRequest)
+        val authenticationResponse: Authentication = authenticationManager.authenticate(authenticationRequest)
+
+        val token: String = jwtGenerator.generateToken(authenticationResponse)
 
         SecurityContextHolder.getContext().authentication = authenticationResponse
 
-        return ResponseEntity("User login is successful!", HttpStatus.OK)
+        val jwtToken: AuthDto = AuthDto(token, "Bearer ")
+
+        return ResponseEntity(jwtToken, HttpStatus.OK)
     }
 
 

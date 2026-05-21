@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component
 class JWTEntryPoint: AuthenticationEntryPoint {
 
     override fun commence(
-        request: HttpServletRequest?,
-        response: HttpServletResponse?,
-        authException: AuthenticationException?
+        request: HttpServletRequest,
+        response: HttpServletResponse,
+        authException: AuthenticationException
     ) {
-        response?.sendError(HttpStatus.UNAUTHORIZED.value(), authException?.message)
+        response.sendError(HttpStatus.UNAUTHORIZED.value(), authException.message)
     }
 }

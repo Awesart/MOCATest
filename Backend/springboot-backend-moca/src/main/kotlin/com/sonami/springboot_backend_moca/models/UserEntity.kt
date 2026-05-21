@@ -20,13 +20,13 @@ data class UserEntity (
     val id: Long = 0,
 
     @Column(nullable = false)
-    val username: String,
+    val username: String ="",
 
     @Column(nullable = false)
-    val password: String?,
+    val password: String? ="",
 
     @Column(nullable = false)
-    val email: String,
+    val email: String ="",
 
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])

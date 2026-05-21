@@ -45,7 +45,6 @@ class SecurityConfig (
                 authorize("/auth/**", permitAll)
                 authorize(anyRequest, authenticated)
             }
-            httpBasic{ }
 
         }
 

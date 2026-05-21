@@ -6,10 +6,14 @@ import io.jsonwebtoken.Jwts
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Component
 import java.util.Date
+import javax.crypto.SecretKey
 
 @Component
 class JWTGenerator(
 ) {
+    companion object{
+        private val secretKey: SecretKey = Jwts.SIG.HS256.key().build()
+    }
 
     fun generateToken(
         authentication: Authentication
@@ -22,7 +26,7 @@ class JWTGenerator(
             .subject(userName)
             .issuedAt(currentDate)
             .expiration(expirationDate)
-            .signWith(SecurityConstants.secretKey)
+            .signWith(secretKey)
             .compact()
 
         return token
@@ -32,7 +36,7 @@ class JWTGenerator(
         token: String?
     ): String{
         val userName = Jwts.parser()
-            .verifyWith(SecurityConstants.secretKey)
+            .verifyWith(secretKey)
             .build()
             .parseSignedClaims(token)
             .payload
@@ -46,7 +50,7 @@ class JWTGenerator(
     ): Boolean{
         try{
             Jwts.parser()
-                .verifyWith(SecurityConstants.secretKey)
+                .verifyWith(secretKey)
                 .build()
                 .parseSignedClaims(token)
 

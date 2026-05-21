@@ -21,10 +21,11 @@ class JWTAuthenticationFilter: OncePerRequestFilter() {
 
 
     override fun doFilterInternal(
-        request: HttpServletRequest?,
-        response: HttpServletResponse?,
-        filterChain: FilterChain?
+        request: HttpServletRequest,
+        response: HttpServletResponse,
+        filterChain: FilterChain
     ) {
+
         val token: String? = getJWTFromRequest(request)
 
         if(StringUtils.hasText(token) && jwtGenerator.validateToken(token) ){
@@ -45,7 +46,7 @@ class JWTAuthenticationFilter: OncePerRequestFilter() {
         }
 
         //Move down/up the filter.
-        filterChain?.doFilter(request, response)
+        filterChain.doFilter(request, response)
     }
 
     fun getJWTFromRequest(
@@ -53,7 +54,7 @@ class JWTAuthenticationFilter: OncePerRequestFilter() {
     ): String?{
         val authHeaderValue = request?.getHeader("Authorization")
 
-        if(authHeaderValue != null && authHeaderValue.startsWith("Bearer")){
+        if(authHeaderValue != null && authHeaderValue.startsWith("Bearer ")){
             val token: String = authHeaderValue.substring(7, authHeaderValue.length)
             return token
         }
