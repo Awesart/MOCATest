@@ -3,6 +3,7 @@ package org.example.project.impl
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
+import org.example.project.api.ClientAPI
 import org.example.project.commonUI.auth.Home
 import org.example.project.commonUI.auth.Login
 import org.example.project.api.HomeScreen
@@ -30,6 +31,10 @@ fun EntryProviderScope<NavKey>.loginScreen(backStack:  NavBackStack<NavKey>) {
     entry<LoginScreen> {
         Login(
             onLoginClick = {
+                val client: ClientAPI = ClientAPI()
+
+
+
                 backStack.add(LoginScreen)
             },
             onSignUpClick = {
