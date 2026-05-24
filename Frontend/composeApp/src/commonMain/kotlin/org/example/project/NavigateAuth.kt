@@ -1,38 +1,33 @@
 package org.example.project
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.serialization.SavedStateConfiguration
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
-import org.example.project.api.HomeScreen
-import org.example.project.api.LoginScreen
-import org.example.project.api.SignUpScreen
-import org.example.project.impl.homeScreen
-import org.example.project.impl.loginScreen
-import org.example.project.impl.signUpScreen
+import org.example.project.navigation.impl.api.NavKeysAuth
+import org.example.project.navigation.impl.impl.homeScreen
+import org.example.project.navigation.impl.impl.loginScreen
+import org.example.project.navigation.impl.impl.signUpScreen
 
 
 private val config = SavedStateConfiguration{
     serializersModule = SerializersModule {
         polymorphic(NavKey::class){
-            subclass(HomeScreen::class, HomeScreen.serializer())
-            subclass(LoginScreen::class, LoginScreen.serializer())
-            subclass(SignUpScreen::class, SignUpScreen.serializer())
+            subclass(NavKeysAuth.HomeScreen::class, NavKeysAuth.HomeScreen.serializer())
+            subclass(NavKeysAuth.LoginScreen::class, NavKeysAuth.LoginScreen.serializer())
+            subclass(NavKeysAuth.SignUpScreen::class, NavKeysAuth.SignUpScreen.serializer())
         }
     }
 }
 
 @Composable
-fun NavigateRoot() {
+fun NavigateAuth() {
 
-    val backStack = rememberNavBackStack(config, HomeScreen)
+    val backStack = rememberNavBackStack(config, NavKeysAuth.HomeScreen)
 
     NavDisplay(
         backStack = backStack,

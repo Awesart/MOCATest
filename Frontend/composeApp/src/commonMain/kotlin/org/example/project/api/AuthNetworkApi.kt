@@ -4,22 +4,17 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
-import kotlinx.serialization.descriptors.PrimitiveKind
 import org.example.project.models.LoginRequest
 import org.example.project.models.RegisterDto
 
-class ClientAPI {
-    companion object{
-        const val BACKEND_URL: String = "http://localhost:8080/"
-    }
-
+object AuthNetworkApi  {
 
     val client = HttpClient()
 
     suspend fun login(
         loginRequest: LoginRequest
     ){
-        val connectionString: String = BACKEND_URL + "auth/login"
+        val connectionString: String = SecurityConstants.BACKEND_URL + "auth/login"
 
         val response: HttpResponse = client.post(connectionString){
             setBody(loginRequest)
@@ -37,7 +32,7 @@ class ClientAPI {
     suspend fun register(
         registerDto: RegisterDto
     ){
-        val connectionString: String = BACKEND_URL + "auth/register"
+        val connectionString: String = SecurityConstants.BACKEND_URL + "auth/register"
 
         val response: HttpResponse = client.post(connectionString){
             setBody(registerDto)
