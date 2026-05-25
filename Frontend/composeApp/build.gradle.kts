@@ -48,7 +48,7 @@ kotlin {
             implementation(libs.jetbrains.lifecycle.viewmodelNavigation3)
             implementation(libs.jetbrains.material3.adaptiveNavigation3)
             implementation(libs.ktor.client.core)
-
+            implementation(libs.bundles.ktor)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

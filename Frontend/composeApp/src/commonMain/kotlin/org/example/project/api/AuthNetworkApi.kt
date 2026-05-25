@@ -9,7 +9,9 @@ import org.example.project.models.RegisterDto
 
 object AuthNetworkApi  {
 
-    val client = HttpClient()
+    val client = HttpClient(){
+
+    }
 
     suspend fun login(
         loginRequest: LoginRequest

@@ -1,22 +1,31 @@
-package org.example.project.navigation.impl.impl
+package org.example.project.navigation.impl
 
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
+import org.example.project.navigation.ui.NavigateAuth
 import org.example.project.commonUI.auth.Home
 import org.example.project.commonUI.auth.Login
-import org.example.project.navigation.impl.api.NavKeysAuth
 import org.example.project.commonUI.auth.SignUp
+import org.example.project.navigation.api.Route
+
+fun EntryProviderScope<NavKey>.auth(){
+
+    entry<Route.Auth> {
+        NavigateAuth()
+    }
+
+}
 
 fun EntryProviderScope<NavKey>.homeScreen(backStack:  NavBackStack<NavKey>) {
 
-    entry<NavKeysAuth.HomeScreen> {
+    entry<Route.Auth.HomeScreen> {
         Home(
             onLoginClick = {
-                backStack.add(NavKeysAuth.LoginScreen)
+                backStack.add(Route.Auth.LoginScreen)
             },
             onSignUpClick = {
-                backStack.add(NavKeysAuth.SignUpScreen)
+                backStack.add(Route.Auth.SignUpScreen)
             }
         )
     }
@@ -25,13 +34,13 @@ fun EntryProviderScope<NavKey>.homeScreen(backStack:  NavBackStack<NavKey>) {
 
 fun EntryProviderScope<NavKey>.loginScreen(backStack:  NavBackStack<NavKey>) {
 
-    entry<NavKeysAuth.LoginScreen> {
+    entry<Route.Auth.LoginScreen> {
         Login(
             onLoginClick = {
-                backStack.add(NavKeysAuth.LoginScreen)
+                backStack.add(Route.Auth.LoginScreen)
             },
             onSignUpClick = {
-                backStack.add(NavKeysAuth.SignUpScreen)
+                backStack.add(Route.Auth.SignUpScreen)
             }
         )
     }
@@ -40,10 +49,10 @@ fun EntryProviderScope<NavKey>.loginScreen(backStack:  NavBackStack<NavKey>) {
 
 fun EntryProviderScope<NavKey>.signUpScreen(backStack:  NavBackStack<NavKey>) {
 
-    entry<NavKeysAuth.SignUpScreen> {
+    entry<Route.Auth.SignUpScreen> {
         SignUp(
             onSignUpClick = {
-                backStack.add(NavKeysAuth.SignUpScreen)
+                backStack.add(Route.Auth.SignUpScreen)
             }
         )
     }
