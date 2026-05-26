@@ -1,15 +1,19 @@
-package org.example.project.api
+package org.example.project.data
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.http.ContentType.Application.Json
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 
 fun createHttpClient(engine: HttpClientEngine): HttpClient{
     return HttpClient(engine){
         install(ContentNegotiation){
-            json()
+            json(
+                json = Json{
+                    ignoreUnknownKeys = true
+                }
+            )
         }
 
 
