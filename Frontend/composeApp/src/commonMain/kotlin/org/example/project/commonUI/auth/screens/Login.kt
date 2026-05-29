@@ -17,12 +17,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import org.example.project.theme.elements.NoteMarkField
-import org.example.project.theme.elements.NoteMarkRectangle
-import org.example.project.theme.elements.NoteMarkRoundedButton
+import org.example.project.commonUI.theme.elements.NoteMarkRoundedButton
+import org.example.project.commonUI.theme.elements.NoteMarkField
+import org.example.project.commonUI.theme.elements.NoteMarkRectangle
+import org.example.project.commonUI.theme.elements.NoteMarkTextButton
+
 
 @Composable
-fun SignUp(
+fun Login(
+    onLoginClick: () -> Unit,
     onSignUpClick: () -> Unit
 ) {
 
@@ -31,9 +34,9 @@ fun SignUp(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ){
-            SignUpHeader()
-            Spacer(modifier = Modifier.height(75.dp))
-            SignUpSection(onSignUpClick)
+            LoginHeader()
+            Spacer(modifier = Modifier.height(85.dp))
+            LoginSection(onLoginClick, onSignUpClick)
             Spacer(modifier = Modifier.weight(1f))
             NoteMarkRectangle(
                 190f,
@@ -53,7 +56,7 @@ fun SignUp(
 }
 
 @Composable
-fun SignUpHeader() {
+fun LoginHeader() {
 
     NoteMarkRectangle(
         -7f,
@@ -70,7 +73,7 @@ fun SignUpHeader() {
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         Text(
-            text = "Welcome! Please register to get started",
+            text = "Welcome back! Please login to your account",
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Medium,
             textAlign = TextAlign.Center,
@@ -81,7 +84,8 @@ fun SignUpHeader() {
 }
 
 @Composable
-fun SignUpSection(
+fun LoginSection(
+    onLoginClick: () -> Unit,
     onSignUpClick: () -> Unit
 ) {
     Column (
@@ -89,16 +93,18 @@ fun SignUpSection(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth(0.85f)
     ){
-        NoteMarkField("Name", "Name", false)
         NoteMarkField("Username", "Username", false)
         NoteMarkField("Password", "Password", true)
         Spacer(modifier = Modifier.height(10.dp))
         NoteMarkRoundedButton(
-            onSignUpClick,
-            "Sign up ",
+            onLoginClick,
+            "Login",
             modifier = Modifier.align(Alignment.CenterHorizontally)
                 .fillMaxWidth(.8f))
-
+        NoteMarkTextButton(
+            onSignUpClick,
+            "Don't Have an account?"
+            )
     }
 
 

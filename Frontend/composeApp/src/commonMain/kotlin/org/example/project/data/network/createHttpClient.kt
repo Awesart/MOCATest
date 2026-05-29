@@ -1,4 +1,4 @@
-package org.example.project.data
+package org.example.project.data.network
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine

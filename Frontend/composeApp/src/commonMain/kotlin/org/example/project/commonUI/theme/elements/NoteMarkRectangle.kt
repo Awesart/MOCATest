@@ -1,4 +1,4 @@
-package org.example.project.theme.elements
+package org.example.project.commonUI.theme.elements
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
@@ -12,8 +12,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.unit.dp
-import org.example.project.theme.insideRectangle
-import org.example.project.theme.outsideRectangle
+import org.example.project.commonUI.theme.insideRectangle
+import org.example.project.commonUI.theme.outsideRectangle
 
 @Composable
 fun NoteMarkRectangle(

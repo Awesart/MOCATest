@@ -3,10 +3,10 @@ package org.example.project.navigation.impl
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
-import org.example.project.commonUI.MainContent.SettingsScreen
-import org.example.project.commonUI.MainContent.StatsScreen
-import org.example.project.commonUI.MainContent.TestScreen
-import org.example.project.commonUI.MainContent.MainHomeScreen
+import org.example.project.commonUI.mainContent.SettingsScreen
+import org.example.project.commonUI.mainContent.StatsScreen
+import org.example.project.commonUI.mainContent.TestScreen
+import org.example.project.commonUI.mainContent.MainHomeScreen
 import org.example.project.navigation.ui.NavigateMain
 import org.example.project.navigation.api.Route
 

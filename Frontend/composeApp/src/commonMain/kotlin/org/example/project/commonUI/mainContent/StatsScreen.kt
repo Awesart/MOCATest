@@ -1,4 +1,4 @@
-package org.example.project.commonUI.MainContent
+package org.example.project.commonUI.mainContent
 
 import androidx.compose.runtime.Composable
 

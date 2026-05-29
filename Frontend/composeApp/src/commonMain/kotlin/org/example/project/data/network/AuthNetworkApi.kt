@@ -1,4 +1,4 @@
-package org.example.project.data
+package org.example.project.data.network
 
 import io.ktor.client.HttpClient
 import io.ktor.client.request.post
@@ -6,8 +6,8 @@ import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import org.example.project.domain.errorHandling.DataError
 import org.example.project.domain.errorHandling.Result
-import org.example.project.models.LoginRequest
-import org.example.project.models.RegisterDto
+import org.example.project.data.models.LoginRequest
+import org.example.project.data.models.RegisterDto
 import org.koin.core.annotation.Singleton
 
 interface AuthApi{

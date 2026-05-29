@@ -1,4 +1,4 @@
-package org.example.project.theme.elements
+package org.example.project.commonUI.theme.elements
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -20,16 +20,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import loginscreentest.composeapp.generated.resources.Res
-import loginscreentest.composeapp.generated.resources.visibility
 import loginscreentest.composeapp.generated.resources.visibility_24px
-import loginscreentest.composeapp.generated.resources.visibility_off
 import loginscreentest.composeapp.generated.resources.visibility_off_24px
-import org.example.project.theme.Visibility
-import org.example.project.theme.VisibilityOff
-import org.example.project.theme.hintColor
+import org.example.project.commonUI.theme.hintColor
 import org.jetbrains.compose.resources.painterResource
 
 

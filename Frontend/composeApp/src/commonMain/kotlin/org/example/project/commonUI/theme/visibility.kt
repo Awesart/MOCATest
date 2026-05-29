@@ -1,4 +1,4 @@
-package org.example.project.theme
+package org.example.project.commonUI.theme
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor

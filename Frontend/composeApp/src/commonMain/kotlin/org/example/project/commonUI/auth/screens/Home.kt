@@ -17,11 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import org.example.project.theme.elements.NoteMarkRectangle
+import org.example.project.commonUI.theme.elements.NoteMarkRectangle
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.font.FontWeight
-import org.example.project.theme.descriptionColor
-import org.example.project.theme.elements.NoteMarkRoundedButton
+import org.example.project.commonUI.theme.descriptionColor
+import org.example.project.commonUI.theme.elements.NoteMarkRoundedButton
 
 
 @Composable

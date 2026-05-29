@@ -1,10 +1,10 @@
-package org.example.project.domain.otherLogic
+package org.example.project.domain.repositories
 
-import org.example.project.data.AuthNetworkApi
+import org.example.project.data.network.AuthNetworkApi
 import org.example.project.domain.errorHandling.DataError
 import org.example.project.domain.errorHandling.Result
-import org.example.project.models.LoginRequest
-import org.example.project.models.RegisterDto
+import org.example.project.data.models.LoginRequest
+import org.example.project.data.models.RegisterDto
 
 interface AuthRepository {
     suspend fun login(loginRequest: LoginRequest): Result<Unit, DataError>
