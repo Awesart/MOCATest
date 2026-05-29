@@ -1,5 +1,6 @@
 package org.example.project.commonUI.auth.viewModels
 
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -14,9 +15,9 @@ interface RegisterView {
 }
 
 data class RegisterUiState(
-    val username: String = "",
-    val password: String = "",
-    val email: String = ""
+    val usernameState: TextFieldState = TextFieldState(),
+    val passwordState: TextFieldState = TextFieldState(),
+    val emailState: TextFieldState = TextFieldState()
 )
 
 class RegisterViewModel(
@@ -28,31 +29,23 @@ class RegisterViewModel(
     var registerUiState by mutableStateOf(RegisterUiState())
         private set
 
-    fun updateUsername(input: String){
-        registerUiState = registerUiState.copy(
-            username = input
-        )
+    init {
+        println("RegisterViewModel initialized")
     }
 
-    fun updatePassword(input: String){
-        registerUiState = registerUiState.copy(
-            password = input
-        )
+    override fun onCleared() {
+        super.onCleared()
+        println("RegisterViewModel cleared")
     }
 
-    fun updateEmail(input: String){
-        registerUiState = registerUiState.copy(
-            email = input
-        )
-    }
 
     override fun register(
     ){
 
         val registerDto: RegisterDto = RegisterDto(
-            registerUiState.username,
-            registerUiState.password,
-            registerUiState.email
+            registerUiState.usernameState.text.toString(),
+            registerUiState.passwordState.text.toString(),
+            registerUiState.emailState.text.toString()
         )
 
         viewModelScope.launch {

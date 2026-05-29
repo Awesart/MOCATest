@@ -15,7 +15,6 @@ interface AuthApi{
     suspend fun register(registerDto: RegisterDto): Result<String, DataError>
 }
 
-@Singleton
 class AuthNetworkApi(
     private val client: HttpClient
 ): AuthApi {

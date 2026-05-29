@@ -36,7 +36,7 @@ fun EntryProviderScope<NavKey>.loginScreen(backStack:  NavBackStack<NavKey>) {
 
     entry<Route.Auth.LoginScreen> {
         Login(
-            onLoginClick = {
+            onLoginSuccessfulClick = {
                 backStack.add(Route.Auth.LoginScreen)
             },
             onSignUpClick = {

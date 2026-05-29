@@ -17,17 +17,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import org.example.project.commonUI.Auth.login.LoginUIState
+import org.example.project.commonUI.Auth.login.LoginViewModel
 import org.example.project.commonUI.theme.elements.NoteMarkRoundedButton
 import org.example.project.commonUI.theme.elements.NoteMarkField
 import org.example.project.commonUI.theme.elements.NoteMarkRectangle
 import org.example.project.commonUI.theme.elements.NoteMarkTextButton
+import org.koin.compose.viewmodel.koinViewModel
 
 
 @Composable
 fun Login(
-    onLoginClick: () -> Unit,
-    onSignUpClick: () -> Unit
+    onLoginSuccessfulClick: () -> Unit,
+    onSignUpClick: () -> Unit,
+    viewModel: LoginViewModel = koinViewModel()
 ) {
+
+    val loginUIState: LoginUIState = viewModel.loginUIState
 
     Surface{
         Column(
@@ -36,7 +42,7 @@ fun Login(
         ){
             LoginHeader()
             Spacer(modifier = Modifier.height(85.dp))
-            LoginSection(onLoginClick, onSignUpClick)
+            LoginSection(onLoginSuccessfulClick, onSignUpClick, loginUIState)
             Spacer(modifier = Modifier.weight(1f))
             NoteMarkRectangle(
                 190f,
@@ -85,19 +91,20 @@ fun LoginHeader() {
 
 @Composable
 fun LoginSection(
-    onLoginClick: () -> Unit,
-    onSignUpClick: () -> Unit
+    onLoginSuccessfulClick: () -> Unit,
+    onSignUpClick: () -> Unit,
+    loginUIState: LoginUIState
 ) {
     Column (
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth(0.85f)
     ){
-        NoteMarkField("Username", "Username", false)
-        NoteMarkField("Password", "Password", true)
+        NoteMarkField("Username", "Username", false, loginUIState.usernameState)
+        NoteMarkField("Password", "Password", true, loginUIState.passwordState)
         Spacer(modifier = Modifier.height(10.dp))
         NoteMarkRoundedButton(
-            onLoginClick,
+            onLoginSuccessfulClick,
             "Login",
             modifier = Modifier.align(Alignment.CenterHorizontally)
                 .fillMaxWidth(.8f))

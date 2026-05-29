@@ -95,9 +95,9 @@ fun SignUpSection(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth(0.85f)
     ){
-        NoteMarkField("Name", "Name", false)
-        NoteMarkField("Username", "Username", false)
-        NoteMarkField("Password", "Password", true)
+        NoteMarkField("Email", "Email", false, registerUiState.emailState)
+        NoteMarkField("Username", "Username", false, registerUiState.usernameState)
+        NoteMarkField("Password", "Password", true, registerUiState.passwordState)
         Spacer(modifier = Modifier.height(10.dp))
         NoteMarkRoundedButton(
             onSignUpClick,
