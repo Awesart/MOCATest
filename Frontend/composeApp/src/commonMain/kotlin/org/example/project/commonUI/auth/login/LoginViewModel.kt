@@ -7,18 +7,19 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import loginscreentest.composeapp.generated.resources.Res
 import org.example.project.data.models.LoginRequest
-import org.example.project.data.models.RegisterDto
+import org.example.project.domain.errorHandling.DataError
+import org.example.project.domain.errorHandling.Result
 import org.example.project.domain.repositories.AuthRepository
 
 interface LoginView {
-    fun login()
+    fun login( onLoginSuccessfulClick: () -> Unit )
 }
 
 data class LoginUIState(
     val usernameState: TextFieldState = TextFieldState(),
-    val passwordState: TextFieldState = TextFieldState()
+    val passwordState: TextFieldState = TextFieldState(),
+    var errorMessage: String = ""
 )
 
 class LoginViewModel(
@@ -37,8 +38,9 @@ class LoginViewModel(
         println("LoginViewModel cleared")
     }
 
-    override fun login() {
-
+    override fun login(
+        onLoginSuccessfulClick: () -> Unit
+    ) {
 
         val loginRequest = LoginRequest(
             loginUIState.usernameState.text.toString(),
@@ -46,8 +48,18 @@ class LoginViewModel(
         )
 
         viewModelScope.launch {
-            authRepository.login(loginRequest)
+            println(loginRequest)
+            val result = authRepository.login(loginRequest)
+
+            val notAuthResult = Result.Error<Unit, DataError>(DataError.Network.NOT_AUTHORIZED)
+
+            when(result){
+                is Result.Success -> onLoginSuccessfulClick
+                notAuthResult -> loginUIState.errorMessage = "User is not authorized"
+                else -> loginUIState.errorMessage = "Internal server error"
+            }
         }
+
 
 
     }

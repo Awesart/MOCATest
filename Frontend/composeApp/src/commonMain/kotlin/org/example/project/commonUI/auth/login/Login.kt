@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -42,7 +43,7 @@ fun Login(
         ){
             LoginHeader()
             Spacer(modifier = Modifier.height(85.dp))
-            LoginSection(onLoginSuccessfulClick, onSignUpClick, loginUIState)
+            LoginSection(onLoginSuccessfulClick, onSignUpClick, loginUIState, viewModel)
             Spacer(modifier = Modifier.weight(1f))
             NoteMarkRectangle(
                 190f,
@@ -93,7 +94,8 @@ fun LoginHeader() {
 fun LoginSection(
     onLoginSuccessfulClick: () -> Unit,
     onSignUpClick: () -> Unit,
-    loginUIState: LoginUIState
+    loginUIState: LoginUIState,
+    viewModel: LoginViewModel
 ) {
     Column (
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -102,12 +104,24 @@ fun LoginSection(
     ){
         NoteMarkField("Username", "Username", false, loginUIState.usernameState)
         NoteMarkField("Password", "Password", true, loginUIState.passwordState)
-        Spacer(modifier = Modifier.height(10.dp))
+        //Spacer(modifier = Modifier.height(10.dp))
+
+        Text(
+            text = loginUIState.errorMessage,
+            modifier = Modifier,
+            color = Color.Red,
+            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+            fontWeight = FontWeight.SemiBold
+        )
+
         NoteMarkRoundedButton(
-            onLoginSuccessfulClick,
+            { viewModel.login(onLoginSuccessfulClick) },
             "Login",
             modifier = Modifier.align(Alignment.CenterHorizontally)
                 .fillMaxWidth(.8f))
+
+
+
         NoteMarkTextButton(
             onSignUpClick,
             "Don't Have an account?"

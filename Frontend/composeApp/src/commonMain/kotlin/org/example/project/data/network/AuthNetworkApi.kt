@@ -4,11 +4,12 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
 import org.example.project.domain.errorHandling.DataError
 import org.example.project.domain.errorHandling.Result
 import org.example.project.data.models.LoginRequest
 import org.example.project.data.models.RegisterDto
-import org.koin.core.annotation.Singleton
 
 interface AuthApi{
     suspend fun login(loginRequest: LoginRequest): Result<Unit, DataError>
@@ -27,6 +28,7 @@ class AuthNetworkApi(
 
         return try{
             val response: HttpResponse = client.post(connectionString){
+                contentType(ContentType.Application.Json)
                 setBody(loginRequest)
             }
 
@@ -59,10 +61,11 @@ class AuthNetworkApi(
         registerDto: RegisterDto
     ): Result<String, DataError>{
 
-        val connectionString: String = SecurityConstants.BACKEND_URL + "auth/register"
+        val connectionEndpoint: String = SecurityConstants.BACKEND_URL + "auth/register"
 
         return try {
-            val response: HttpResponse = client.post(connectionString){
+            val response: HttpResponse = client.post(connectionEndpoint){
+                contentType(ContentType.Application.Json)
                 setBody(registerDto)
             }
 
