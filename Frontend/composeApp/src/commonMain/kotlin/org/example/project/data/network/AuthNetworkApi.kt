@@ -24,7 +24,7 @@ class AuthNetworkApi(
     override suspend fun login(
         loginRequest: LoginRequest
     ): Result<Unit, DataError>{
-        val connectionString: String = SecurityConstants.BACKEND_URL + "auth/login"
+        val connectionString = "auth/login"
 
         return try{
             val response: HttpResponse = client.post(connectionString){
@@ -61,7 +61,7 @@ class AuthNetworkApi(
         registerDto: RegisterDto
     ): Result<String, DataError>{
 
-        val connectionEndpoint: String = SecurityConstants.BACKEND_URL + "auth/register"
+        val connectionEndpoint = "auth/register"
 
         return try {
             val response: HttpResponse = client.post(connectionEndpoint){

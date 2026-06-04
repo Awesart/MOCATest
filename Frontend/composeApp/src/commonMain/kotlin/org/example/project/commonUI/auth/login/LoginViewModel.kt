@@ -51,17 +51,24 @@ class LoginViewModel(
             println(loginRequest)
             val result = authRepository.login(loginRequest)
 
+            println(result)
+
             val notAuthResult = Result.Error<Unit, DataError>(DataError.Network.NOT_AUTHORIZED)
 
             when(result){
                 is Result.Success -> onLoginSuccessfulClick
-                notAuthResult -> loginUIState.errorMessage = "User is not authorized"
-                else -> loginUIState.errorMessage = "Internal server error"
+                notAuthResult -> updateErrorMessage("User is not authorized")
+                else -> updateErrorMessage("Internal server error")
             }
+
         }
 
+    }
 
-
+    fun updateErrorMessage(errorMessage: String){
+        loginUIState = loginUIState.copy(
+            errorMessage = errorMessage
+        )
     }
 
 }

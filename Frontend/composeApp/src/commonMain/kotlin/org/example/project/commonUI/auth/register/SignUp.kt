@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -38,7 +39,7 @@ fun SignUp(
         ){
             SignUpHeader()
             Spacer(modifier = Modifier.height(75.dp))
-            SignUpSection(onSignUpClick, registerUiState)
+            SignUpSection(onSignUpClick, registerUiState, viewModel)
             Spacer(modifier = Modifier.weight(1f))
             NoteMarkRectangle(
                 190f,
@@ -70,7 +71,6 @@ fun SignUpHeader() {
 
     )
 
-
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ){
@@ -88,7 +88,8 @@ fun SignUpHeader() {
 @Composable
 fun SignUpSection(
     onSignUpClick: () -> Unit,
-    registerUiState: RegisterUiState
+    registerUiState: RegisterUiState,
+    viewModel: RegisterViewModel
 ) {
     Column (
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -99,8 +100,17 @@ fun SignUpSection(
         NoteMarkField("Username", "Username", false, registerUiState.usernameState)
         NoteMarkField("Password", "Password", true, registerUiState.passwordState)
         Spacer(modifier = Modifier.height(10.dp))
+
+        Text(
+            text = registerUiState.errorMessage,
+            modifier = Modifier,
+            color = Color.Red,
+            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+            fontWeight = FontWeight.SemiBold
+        )
+
         NoteMarkRoundedButton(
-            onSignUpClick,
+            { viewModel.register(onSignUpClick) },
             "Sign up ",
             modifier = Modifier.align(Alignment.CenterHorizontally)
                 .fillMaxWidth(.8f))

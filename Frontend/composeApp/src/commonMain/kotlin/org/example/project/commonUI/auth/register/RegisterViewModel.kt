@@ -9,15 +9,18 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.example.project.domain.repositories.AuthRepository
 import org.example.project.data.models.RegisterDto
+import org.example.project.domain.errorHandling.DataError
+import org.example.project.domain.errorHandling.Result
 
 interface RegisterView {
-    fun register()
+    fun register(signUpClick: () -> Unit)
 }
 
 data class RegisterUiState(
     val usernameState: TextFieldState = TextFieldState(),
     val passwordState: TextFieldState = TextFieldState(),
-    val emailState: TextFieldState = TextFieldState()
+    val emailState: TextFieldState = TextFieldState(),
+    val errorMessage: String = "error"
 )
 
 class RegisterViewModel(
@@ -40,19 +43,34 @@ class RegisterViewModel(
 
 
     override fun register(
+        signUpClick: () -> Unit
     ){
 
-        val registerDto: RegisterDto = RegisterDto(
+        val registerDto= RegisterDto(
             registerUiState.usernameState.text.toString(),
             registerUiState.passwordState.text.toString(),
             registerUiState.emailState.text.toString()
         )
 
         viewModelScope.launch {
-            authRepository.register(registerDto)
+            val result = authRepository.register(registerDto)
+
+            val notAuthResult = Result.Error<Unit, DataError>(DataError.Network.NOT_AUTHORIZED)
+
+            when(result){
+                is Result.Success -> signUpClick
+                notAuthResult -> updateErrorMessage("Not Authorized to Register")
+                else -> updateErrorMessage("Internal Server Error")
+            }
 
         }
 
+    }
+
+    fun updateErrorMessage(errorMessage: String){
+        registerUiState = registerUiState.copy(
+            errorMessage = errorMessage
+        )
     }
 
 

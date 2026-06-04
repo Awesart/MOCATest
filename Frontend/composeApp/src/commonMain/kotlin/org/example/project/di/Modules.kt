@@ -1,6 +1,8 @@
 package org.example.project.di
 
+import org.example.project.commonUI.Auth.login.LoginView
 import org.example.project.commonUI.Auth.login.LoginViewModel
+import org.example.project.commonUI.auth.viewModels.RegisterView
 import org.example.project.commonUI.auth.viewModels.RegisterViewModel
 import org.example.project.data.network.AuthApi
 import org.example.project.data.network.AuthNetworkApi
@@ -25,8 +27,8 @@ val networkModule = module {
 }
 
 val appModule = module{
-    viewModelOf(::RegisterViewModel)
-    viewModelOf(::LoginViewModel)
+    viewModelOf(::RegisterViewModel).bind<RegisterView>()
+    viewModelOf(::LoginViewModel).bind<LoginView>()
 }
 
 val repositoryModule = module {
