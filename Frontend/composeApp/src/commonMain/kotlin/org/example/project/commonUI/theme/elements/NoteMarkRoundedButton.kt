@@ -1,5 +1,6 @@
 package org.example.project.commonUI.theme.elements
 
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.MaterialTheme
@@ -14,9 +15,9 @@ import org.example.project.commonUI.theme.buttonEnabledColor
 
 @Composable
 fun NoteMarkRoundedButton(
-    onClick: () -> Unit,
+    onClick: (() -> Unit)?,
     text: String,
-    modifier : Modifier = Modifier) {
+    modifier: Modifier = Modifier) {
 
     val buttonColors = ButtonColors(
         buttonEnabledColor,
@@ -26,9 +27,10 @@ fun NoteMarkRoundedButton(
     )
 
     Button(
-        onClick = {onClick()},
+        onClick = { onClick?.invoke() },
         colors = buttonColors,
-        modifier = modifier
+        modifier = modifier,
+        shape = RoundedCornerShape(25)
     ) {
         Text(
             text = text,
