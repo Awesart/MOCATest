@@ -1,6 +1,10 @@
 package org.example.project.navigation.ui
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
@@ -30,15 +34,32 @@ private val config = SavedStateConfiguration{
 fun NavigateMain(){
     val backStack = rememberNavBackStack(config, Route.Main.MainHome)
 
-    NavDisplay(
-        backStack = backStack,
-        onBack = { backStack.removeLastOrNull() },
-        entryProvider  = entryProvider{
-            mainHome(backStack)
-            test(backStack)
-            stats(backStack)
-            settings(backStack)
+    Scaffold(
+        bottomBar = {
+                MainNavigationBar(
+                selectedKey = TODO(),
+                onSelectedKey = {
+                    // TODO: Select Key
+                }
+            )
         }
-    )
+    ){
+        innerPadding ->
+        NavDisplay(
+            backStack = backStack,
+            onBack = { backStack.removeLastOrNull() },
+            entryProvider  = entryProvider{
+                mainHome(backStack)
+                test(backStack)
+                stats(backStack)
+                settings(backStack)
+            },
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+        )
+    }
+
+
 
 }

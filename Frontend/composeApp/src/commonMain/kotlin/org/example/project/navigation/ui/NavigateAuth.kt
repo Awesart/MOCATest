@@ -11,6 +11,7 @@ import kotlinx.serialization.modules.polymorphic
 import org.example.project.navigation.api.Route
 import org.example.project.navigation.impl.homeScreen
 import org.example.project.navigation.impl.loginScreen
+import org.example.project.navigation.impl.signUpCompleteScreen
 import org.example.project.navigation.impl.signUpScreen
 
 
@@ -36,6 +37,7 @@ fun NavigateAuth() {
             homeScreen(backStack)
             loginScreen(backStack)
             signUpScreen(backStack)
+            signUpCompleteScreen(backStack)
         }
     )
 

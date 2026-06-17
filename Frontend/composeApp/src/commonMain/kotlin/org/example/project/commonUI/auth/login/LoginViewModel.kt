@@ -56,7 +56,7 @@ class LoginViewModel(
             val notAuthResult = Result.Error<Unit, DataError>(DataError.Network.NOT_AUTHORIZED)
 
             when(result){
-                is Result.Success -> onLoginSuccessfulClick
+                is Result.Success -> onLoginSuccessfulClick()
                 notAuthResult -> updateErrorMessage("User is not authorized")
                 else -> updateErrorMessage("Internal server error")
             }

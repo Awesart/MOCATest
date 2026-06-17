@@ -3,11 +3,13 @@ package org.example.project.navigation.impl
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
+import org.example.project.commonUI.Auth.registerComplete.RegisterComplete
 import org.example.project.navigation.ui.NavigateAuth
 import org.example.project.commonUI.auth.Home
 import org.example.project.commonUI.auth.Login
 import org.example.project.commonUI.auth.SignUp
 import org.example.project.navigation.api.Route
+import org.example.project.navigation.ui.NavigateMain
 
 fun EntryProviderScope<NavKey>.auth(){
 
@@ -52,7 +54,19 @@ fun EntryProviderScope<NavKey>.signUpScreen(backStack:  NavBackStack<NavKey>) {
     entry<Route.Auth.SignUpScreen> {
         SignUp(
             onSignUpClick = {
-                backStack.add(Route.Auth.SignUpScreen)
+                backStack.add(Route.Auth.SignUpCompleteScreen)
+            }
+        )
+    }
+
+}
+
+fun EntryProviderScope<NavKey>.signUpCompleteScreen(backStack: NavBackStack<NavKey>){
+
+    entry<Route.Auth.SignUpCompleteScreen> {
+        RegisterComplete(
+            onContinue = {
+                backStack.add(Route.Auth.LoginScreen)
             }
         )
     }

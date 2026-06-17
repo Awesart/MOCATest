@@ -24,9 +24,10 @@ import org.example.project.commonUI.theme.elements.NoteMarkRectangle
 import org.example.project.commonUI.theme.elements.NoteMarkRoundedButton
 import org.jetbrains.compose.resources.painterResource
 
-@Preview
 @Composable
-fun RegisterComplete(){
+fun RegisterComplete(
+    onContinue: () -> Unit
+){
 
     Surface{
         Column(
@@ -68,7 +69,7 @@ fun RegisterComplete(){
             Spacer(modifier = Modifier.weight(1f))
 
             NoteMarkRoundedButton(
-                onClick = null,
+                onClick = onContinue,
                 "Continue",
                 modifier = Modifier.fillMaxWidth(.95f)
             )

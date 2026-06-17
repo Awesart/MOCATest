@@ -20,7 +20,7 @@ data class RegisterUiState(
     val usernameState: TextFieldState = TextFieldState(),
     val passwordState: TextFieldState = TextFieldState(),
     val emailState: TextFieldState = TextFieldState(),
-    val errorMessage: String = "error"
+    val errorMessage: String = ""
 )
 
 class RegisterViewModel(
@@ -58,7 +58,7 @@ class RegisterViewModel(
             val notAuthResult = Result.Error<Unit, DataError>(DataError.Network.NOT_AUTHORIZED)
 
             when(result){
-                is Result.Success -> signUpClick
+                is Result.Success -> signUpClick()
                 notAuthResult -> updateErrorMessage("Not Authorized to Register")
                 else -> updateErrorMessage("Internal Server Error")
             }
