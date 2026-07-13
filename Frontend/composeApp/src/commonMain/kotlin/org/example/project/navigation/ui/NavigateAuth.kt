@@ -1,6 +1,7 @@
 package org.example.project.navigation.ui
 
 import androidx.compose.runtime.Composable
+import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
@@ -26,7 +27,9 @@ private val config = SavedStateConfiguration{
 }
 
 @Composable
-fun NavigateAuth() {
+fun NavigateAuth(
+    rootBackStack: NavBackStack<NavKey>
+) {
 
     val backStack = rememberNavBackStack(config, Route.Auth.HomeScreen)
 
@@ -35,7 +38,7 @@ fun NavigateAuth() {
         onBack = { backStack.removeLastOrNull() },
         entryProvider = entryProvider {
             homeScreen(backStack)
-            loginScreen(backStack)
+            loginScreen(rootBackStack, backStack)
             signUpScreen(backStack)
             signUpCompleteScreen(backStack)
         }

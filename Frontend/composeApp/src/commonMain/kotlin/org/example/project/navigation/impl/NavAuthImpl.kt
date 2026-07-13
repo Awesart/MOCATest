@@ -11,10 +11,10 @@ import org.example.project.commonUI.auth.SignUp
 import org.example.project.navigation.api.Route
 import org.example.project.navigation.ui.NavigateMain
 
-fun EntryProviderScope<NavKey>.auth(){
+fun EntryProviderScope<NavKey>.auth(rootBackStack: NavBackStack<NavKey>){
 
     entry<Route.Auth> {
-        NavigateAuth()
+        NavigateAuth(rootBackStack)
     }
 
 }
@@ -34,12 +34,14 @@ fun EntryProviderScope<NavKey>.homeScreen(backStack:  NavBackStack<NavKey>) {
 
 }
 
-fun EntryProviderScope<NavKey>.loginScreen(backStack:  NavBackStack<NavKey>) {
+fun EntryProviderScope<NavKey>.loginScreen(
+    rootBackStack: NavBackStack<NavKey>,
+    backStack:  NavBackStack<NavKey>) {
 
     entry<Route.Auth.LoginScreen> {
         Login(
             onLoginSuccessfulClick = {
-                backStack.add(Route.Auth.LoginScreen)
+                rootBackStack.add(Route.Main)
             },
             onSignUpClick = {
                 backStack.add(Route.Auth.SignUpScreen)

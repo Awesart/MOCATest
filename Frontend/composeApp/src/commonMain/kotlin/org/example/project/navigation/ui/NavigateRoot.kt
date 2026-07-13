@@ -30,7 +30,7 @@ fun NavigateRoot(){
         backStack = backStack,
         onBack = { backStack.removeLastOrNull() },
         entryProvider = entryProvider {
-            auth()
+            auth(backStack)
             main()
         },
     )

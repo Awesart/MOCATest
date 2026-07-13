@@ -18,7 +18,7 @@ fun EntryProviderScope<NavKey>.main(){
 
 }
 
-fun EntryProviderScope<NavKey>.mainHome(backStack: NavBackStack<NavKey>){
+fun EntryProviderScope<NavKey>.mainHome(){
 
     entry<Route.Main.MainHome> {
         MainHomeScreen()
@@ -26,25 +26,25 @@ fun EntryProviderScope<NavKey>.mainHome(backStack: NavBackStack<NavKey>){
 
 }
 
-fun EntryProviderScope<NavKey>.test(backStack: NavBackStack<NavKey>){
+fun EntryProviderScope<NavKey>.test(){
 
-    entry<Route.Main.MainHome> {
+    entry<Route.Main.Test> {
         TestScreen()
     }
 
 }
 
-fun EntryProviderScope<NavKey>.stats(backStack: NavBackStack<NavKey>){
+fun EntryProviderScope<NavKey>.stats(){
 
-    entry<Route.Main.MainHome> {
+    entry<Route.Main.Stats> {
         StatsScreen()
     }
 
 }
 
-fun EntryProviderScope<NavKey>.settings(backStack: NavBackStack<NavKey>){
+fun EntryProviderScope<NavKey>.settings(){
 
-    entry<Route.Main.MainHome> {
+    entry<Route.Main.Settings> {
         SettingsScreen()
     }
 
