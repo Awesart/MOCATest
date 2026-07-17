@@ -9,7 +9,9 @@ plugins {
     alias(libs.plugins.composeHotReload)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.koin.compiler)
+    alias(libs.plugins.protobuf)
 }
+
 
 kotlin {
     androidTarget {
@@ -56,6 +58,8 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.koin.compose.viewmodel.navigation)
+            implementation(libs.datastore)
+            implementation(libs.datastore.preferences)
 
         }
         iosMain.dependencies {

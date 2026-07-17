@@ -8,6 +8,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.NavKey
+import org.example.project.commonUI.theme.insideRectangle
+import org.example.project.commonUI.theme.navBarColor
+import org.example.project.commonUI.theme.outsideRectangle
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -17,7 +20,8 @@ fun MainNavigationBar(
     modifier: Modifier = Modifier
 ){
     NavigationBar(
-        windowInsets = NavigationBarDefaults.windowInsets
+        windowInsets = NavigationBarDefaults.windowInsets,
+        containerColor = navBarColor
     ) {
         TOP_LEVEL_DESTINATIONS.forEach { (topLevelDestination, data) ->
             NavigationBarItem(

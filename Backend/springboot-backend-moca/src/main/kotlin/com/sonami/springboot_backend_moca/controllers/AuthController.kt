@@ -45,7 +45,7 @@ class AuthController (
 
         SecurityContextHolder.getContext().authentication = authenticationResponse
 
-        val jwtToken: AuthDto = AuthDto(token, "Bearer ")
+        val jwtToken = AuthDto(token, "Bearer ")
 
         return ResponseEntity(jwtToken, HttpStatus.OK)
     }
