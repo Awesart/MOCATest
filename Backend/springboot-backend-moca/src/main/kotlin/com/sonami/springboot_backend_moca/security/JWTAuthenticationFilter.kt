@@ -43,6 +43,8 @@ class JWTAuthenticationFilter: OncePerRequestFilter() {
             //SecurityContextHolder's authentication grabs whether the user is authenticated or not
             SecurityContextHolder.getContext().authentication = authenticationToken
 
+            println(SecurityContextHolder.getContext().authentication)
+
         }
 
         //Move down/up the filter.

@@ -3,11 +3,13 @@ package com.sonami.springboot_backend_moca.controllers
 import com.sonami.springboot_backend_moca.dto.AuthDto
 import com.sonami.springboot_backend_moca.dto.LoginRequest
 import com.sonami.springboot_backend_moca.dto.RegisterDto
+import com.sonami.springboot_backend_moca.dto.UserUiDto
 import com.sonami.springboot_backend_moca.models.Roles
 import com.sonami.springboot_backend_moca.models.UserEntity
 import com.sonami.springboot_backend_moca.repository.RoleRepository
 import com.sonami.springboot_backend_moca.repository.UserRepository
 import com.sonami.springboot_backend_moca.security.JWTGenerator
+import org.apache.coyote.Response
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
@@ -15,6 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -29,6 +32,7 @@ class AuthController (
     private val roleRepository: RoleRepository,
     private val jwtGenerator: JWTGenerator
 ){
+
 
     @PostMapping("/login")
     fun login(
