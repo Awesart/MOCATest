@@ -3,13 +3,12 @@ package org.example.project.navigation.impl
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
-import org.example.project.commonUI.Auth.registerComplete.RegisterComplete
+import org.example.project.commonUI.auth.registerComplete.RegisterComplete
 import org.example.project.navigation.ui.NavigateAuth
-import org.example.project.commonUI.auth.Home
-import org.example.project.commonUI.auth.Login
-import org.example.project.commonUI.auth.SignUp
+import org.example.project.commonUI.auth.home.Home
+import org.example.project.commonUI.auth.login.Login
+import org.example.project.commonUI.auth.register.SignUp
 import org.example.project.navigation.api.Route
-import org.example.project.navigation.ui.NavigateMain
 
 fun EntryProviderScope<NavKey>.auth(rootBackStack: NavBackStack<NavKey>){
 

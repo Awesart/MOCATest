@@ -1,4 +1,4 @@
-package org.example.project.commonUI.Auth.login
+package org.example.project.commonUI.auth.login
 
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.getValue
@@ -48,10 +48,7 @@ class LoginViewModel(
         )
 
         viewModelScope.launch {
-            println(loginRequest)
             val result = authRepository.login(loginRequest)
-
-            println(result)
 
             val notAuthResult = Result.Error<Unit, DataError>(DataError.Network.NOT_AUTHORIZED)
 

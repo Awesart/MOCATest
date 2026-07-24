@@ -1,15 +1,19 @@
 package org.example.project.data.network
 
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
+import org.example.project.data.models.JWTRequest
 import org.example.project.domain.errorHandling.DataError
 import org.example.project.domain.errorHandling.Result
 import org.example.project.data.models.LoginRequest
 import org.example.project.data.models.RegisterDto
+import org.example.project.data.models.UserUiDto
+import org.example.project.domain.repositories.UserRepository
 
 interface AuthApi{
     suspend fun login(loginRequest: LoginRequest): Result<Unit, DataError>
@@ -17,9 +21,9 @@ interface AuthApi{
 }
 
 class AuthNetworkApi(
-    private val client: HttpClient
+    private val client: HttpClient,
+    private val userRepository: UserRepository
 ): AuthApi {
-
 
     override suspend fun login(
         loginRequest: LoginRequest
@@ -33,7 +37,17 @@ class AuthNetworkApi(
             }
 
             if (response.status.value in 200..299) {
+
+                val tokenObject: JWTRequest = response.body()
+
+                val token = tokenObject.accessToken
+
+                println(token)
+
+                userRepository.setUserToken(token)
+
                 Result.Success(Unit)
+
             }
             else{
                 when(response.status.value){

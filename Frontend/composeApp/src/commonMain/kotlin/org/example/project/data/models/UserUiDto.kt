@@ -3,7 +3,7 @@ package org.example.project.data.models
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class JWTRequest (
-    val accessToken: String,
-    val tokenType: String
+data class UserUiDto (
+    val username: String,
+    val email: String
 )

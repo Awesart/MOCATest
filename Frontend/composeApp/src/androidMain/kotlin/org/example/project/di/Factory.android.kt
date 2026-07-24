@@ -1,14 +1,15 @@
 package org.example.project.di
 
 import android.app.Application
+import android.content.Context
 import org.example.project.database.UserDataStore
 
 actual class Factory(
-    private val app: Application
+    private val context: Context
 ) {
     actual fun createUserDataStore(): UserDataStore {
         return UserDataStore{
-            app.filesDir
+            context.filesDir
                 .resolve(
                     "user.json"
                 ).absolutePath

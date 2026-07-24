@@ -1,4 +1,4 @@
-package org.example.project.commonUI.auth
+package org.example.project.commonUI.auth.login
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,8 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import org.example.project.commonUI.Auth.login.LoginUIState
-import org.example.project.commonUI.Auth.login.LoginViewModel
 import org.example.project.commonUI.theme.elements.NoteMarkRoundedButton
 import org.example.project.commonUI.theme.elements.NoteMarkField
 import org.example.project.commonUI.theme.elements.NoteMarkRectangle

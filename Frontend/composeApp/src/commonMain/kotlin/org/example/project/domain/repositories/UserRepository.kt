@@ -1,19 +1,33 @@
 package org.example.project.domain.repositories
 
-import org.example.project.data.models.JWTRequest
-import org.example.project.domain.errorHandling.DataError
-import org.example.project.domain.errorHandling.Result
+import kotlinx.coroutines.flow.Flow
+import org.example.project.data.network.UserSessionNetworkApi
+import org.example.project.database.UserSession
+import org.example.project.database.UserDataStore
 
 
 interface UserRepository{
-    suspend fun setUserToken(request: JWTRequest): Result<Unit, DataError>
+    val userSession: Flow<UserSession>
+
+    suspend fun setUserToken(jwtToken: String)
+
+    suspend fun getUser(userSession: UserSession?)
 }
 
 class UserRepositoryImpl (
-
+    private val userDataStore: UserDataStore,
+    private val userSessionNetworkApi: UserSessionNetworkApi
 ): UserRepository{
-    override suspend fun setUserToken(request: JWTRequest): Result<Unit, DataError> {
-        TODO("Not yet implemented")
+
+    override val userSession: Flow<UserSession>
+        get() = userDataStore.userSession
+
+    override suspend fun setUserToken(jwtToken: String) {
+        userDataStore.updateUser(jwtToken)
+    }
+
+    override suspend fun getUser(userSession: UserSession?) {
+        userSessionNetworkApi.getUser(userSession)
     }
 
 }

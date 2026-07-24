@@ -1,4 +1,4 @@
-package org.example.project.commonUI.auth
+package org.example.project.commonUI.auth.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

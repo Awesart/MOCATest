@@ -6,7 +6,7 @@ import androidx.navigation3.runtime.NavKey
 import org.example.project.commonUI.mainContent.SettingsScreen
 import org.example.project.commonUI.mainContent.StatsScreen
 import org.example.project.commonUI.mainContent.TestScreen
-import org.example.project.commonUI.mainContent.MainHomeScreen
+import org.example.project.commonUI.mainContent.mainHome.MainHomeScreen
 import org.example.project.navigation.ui.NavigateMain
 import org.example.project.navigation.api.Route
 

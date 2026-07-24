@@ -8,9 +8,12 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import org.example.project.domain.repositories.UserRepository
 import org.example.project.navigation.api.Route
 
-fun createHttpClient(engine: HttpClientEngine): HttpClient{
+fun createHttpClient(
+    engine: HttpClientEngine,
+): HttpClient{
     return HttpClient(engine){ 
         install(ContentNegotiation){
             json(
@@ -24,9 +27,7 @@ fun createHttpClient(engine: HttpClientEngine): HttpClient{
             port = 8080
         }
         install(Auth){
-            bearer {
 
-            }
         }
 
     }

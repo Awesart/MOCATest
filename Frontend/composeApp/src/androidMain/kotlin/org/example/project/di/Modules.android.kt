@@ -1,17 +1,9 @@
 package org.example.project.di
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.core.FileStorage
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.PreferencesSerializer
-import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.okhttp.OkHttp
-import io.ktor.client.engine.okhttp.OkHttpEngine
-import org.example.project.data.datastore.createDataStore
-import org.example.project.data.datastore.dataStoreFileName
-import org.koin.core.module.Module
-import org.koin.core.module.dsl.singleOf
+import org.example.project.database.UserDataStore
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 actual val platformModule = module{
@@ -19,4 +11,9 @@ actual val platformModule = module{
         OkHttp.create()
     }
 
+}
+actual val preferenceModule = module {
+    single<UserDataStore>{
+        Factory(androidContext()).createUserDataStore()
+    }
 }
