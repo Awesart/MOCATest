@@ -1,25 +1,18 @@
 package org.example.project.data.network
 
-import androidx.lifecycle.viewModelScope
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.headers
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpHeaders
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
-import org.example.project.data.models.JWTRequest
 import org.example.project.data.models.UserUiDto
 import org.example.project.database.UserSession
 import org.example.project.domain.errorHandling.DataError
-import org.example.project.domain.errorHandling.Error
 import org.example.project.domain.errorHandling.Result
-import org.example.project.domain.repositories.UserRepository
 
 interface UserApi{
-    suspend fun getUser(userSession: UserSession): Result<Unit, DataError>
+    suspend fun getUser(userSession: UserSession?): Result<UserUiDto, DataError>
 }
 
 class UserSessionNetworkApi (
@@ -27,14 +20,21 @@ class UserSessionNetworkApi (
 ): UserApi{
 
     override suspend fun getUser(
-        userSession: UserSession
-    ): Result<Unit, DataError> {
-        val connectionString: String = "user/ui"
+        userSession: UserSession?
+    ): Result<UserUiDto, DataError> {
+        val connectionString = "user/ui"
+
+        if(userSession == null){
+            println("User session has no JWT")
+            return Result.Error(DataError.Local.APPLICATION)
+        }
+
+        val bearerToken = "Bearer ${userSession.token}"
 
         return try{
             val response: HttpResponse = client.get(connectionString){
                 headers{
-                    append(HttpHeaders.Authorization, userSession.token)
+                    append(HttpHeaders.Authorization, bearerToken)
                 }
             }
 
@@ -42,9 +42,7 @@ class UserSessionNetworkApi (
 
                 val userUiDto: UserUiDto = response.body()
 
-                println(userUiDto)
-
-                Result.Success(Unit)
+                Result.Success(userUiDto)
             }
             else{
                 when(response.status.value){

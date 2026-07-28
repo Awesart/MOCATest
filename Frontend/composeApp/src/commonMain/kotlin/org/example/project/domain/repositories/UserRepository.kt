@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import org.example.project.data.network.UserSessionNetworkApi
 import org.example.project.database.UserSession
 import org.example.project.database.UserDataStore
+import org.example.project.domain.errorHandling.fold
 
 
 interface UserRepository{
@@ -11,7 +12,7 @@ interface UserRepository{
 
     suspend fun setUserToken(jwtToken: String)
 
-    suspend fun getUser(userSession: UserSession?)
+    suspend fun getUser(userSession: UserSession?): String
 }
 
 class UserRepositoryImpl (
@@ -26,8 +27,16 @@ class UserRepositoryImpl (
         userDataStore.updateUser(jwtToken)
     }
 
-    override suspend fun getUser(userSession: UserSession?) {
-        userSessionNetworkApi.getUser(userSession)
+    override suspend fun getUser(userSession: UserSession?): String {
+        val result = userSessionNetworkApi.getUser(userSession)
+        return result.fold(
+            onSuccess = { user ->
+                user.username
+            },
+            onFailure = { error ->
+                error.toString()
+            }
+        )
     }
 
 }
