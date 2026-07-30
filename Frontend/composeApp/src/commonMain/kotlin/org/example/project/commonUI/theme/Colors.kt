@@ -5,7 +5,8 @@ import androidx.compose.ui.graphics.Color
 val Primary = Color.Black
 val insideRectangle = Color(0xFF3F5FE0)
 val outsideRectangle = Color(0xFFF37979)
-val mHomeBorderColor = Color(0xFF8A9FF2)
+val mHomeBorderColor = Color(0xFF0D1457)
+val mHomeStatsColor = Color(0xFF691414)
 val navBarColor = Color(0xFFF7E1E1)
 val colorOfToBeClickedText = Color(0xFF758FD3)
 val buttonEnabledColor = Color(0xFF3F5FE0)
