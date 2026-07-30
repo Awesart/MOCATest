@@ -24,7 +24,7 @@ val TOP_LEVEL_DESTINATIONS = mapOf(
         title = "Test"
     ),
     Route.Main.Stats to BottomItem(
-        Res.drawable.clipboard_clinic,
+        Res.drawable.chart_pie_alt_svgrepo_com,
         title = "Stats"
     ),
     Route.Main.Settings to BottomItem(

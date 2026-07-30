@@ -17,7 +17,8 @@ interface MainHomeView{
 }
 
 data class MainHomeUiState(
-    val username: String = ""
+    val username: String = "",
+    val email: String = ""
 )
 
 class MainHomeViewModel(
@@ -46,10 +47,11 @@ class MainHomeViewModel(
     override fun getUser(userSession: UserSession?){
 
         viewModelScope.launch {
-            val username = userRepository.getUser(userSession)
+            val user = userRepository.getUser(userSession)
             _uiState.update { currentState ->
                 currentState.copy(
-                    username = username
+                    username = user.username,
+                    email = user.email
                 )
             }
         }

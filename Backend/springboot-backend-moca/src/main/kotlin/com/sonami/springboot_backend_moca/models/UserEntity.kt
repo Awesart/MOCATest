@@ -10,6 +10,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.JoinTable
 import jakarta.persistence.ManyToMany
+import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 
 @Entity
@@ -33,5 +34,10 @@ data class UserEntity (
     @JoinTable(name = "user_roles", joinColumns = [JoinColumn(name = "user_id", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")]
     )
-    var roles: MutableSet<Roles> = mutableSetOf()
+    var roles: MutableSet<Roles> = mutableSetOf(),
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_localUsers", joinColumns = [JoinColumn(name = "user_id", referencedColumnName = "id")])
+    var localUsers: MutableSet<LocalUserEntity> = mutableSetOf()
+
 )
