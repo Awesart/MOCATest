@@ -3,14 +3,17 @@ package org.example.project.commonUI.MainContent.mainHome
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -43,6 +46,8 @@ import org.example.project.commonUI.theme.elements.NoteMarkRoundedButton
 import org.example.project.commonUI.theme.mHomeBorderColor
 import org.example.project.commonUI.theme.mHomeStatsColor
 import org.example.project.commonUI.theme.outsideRectangle
+import org.example.project.data.models.LocalUserDto
+import org.example.project.data.models.LocalUserListDto
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -69,6 +74,72 @@ fun MainHomeScreen(
 
         BlueTestSection()
         RedTestSection()
+    }
+}
+
+@Composable
+fun LeaderBoard(
+    users: List<LocalUserDto>
+){
+
+    LazyColumn{
+        items(users){ user ->
+            LocalUserRow(
+                username = user.localUsername,
+                score = user.score
+            )
+        }
+    }
+
+}
+
+@Composable
+fun LocalUserRow(
+    username: String,
+    score: Float
+){
+
+    val randomColors: List<Color> = listOf()
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth(0.95f)
+            .clip(RoundedCornerShape(14))
+            .background(Color.LightGray),
+    ) {
+
+        Box(
+            modifier = Modifier
+                .size(36.dp)
+                .clip(CircleShape)
+                .background(Color.Red),
+            contentAlignment = Alignment.Center
+        ){
+            Text(
+                text = username.first().toString(),
+                color = Color.White)
+        }
+
+
+        Text(
+            text = username,
+            style = MaterialTheme.typography.labelLarge,
+            fontWeight = FontWeight.Medium,
+            modifier = Modifier.padding(5.dp, 0.dp),
+        )
+
+        Spacer(
+            modifier = Modifier.weight(1f)
+        )
+
+        Text(
+            text = score.toString(),
+            style = MaterialTheme.typography.labelLarge,
+            fontWeight = FontWeight.Medium,
+            modifier = Modifier.padding(5.dp, 0.dp),
+        )
+
     }
 }
 

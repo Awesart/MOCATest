@@ -15,7 +15,7 @@ import jakarta.persistence.Table
 
 @Entity
 @Table(name = "users")
-data class UserEntity (
+class UserEntity (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
@@ -36,8 +36,8 @@ data class UserEntity (
     )
     var roles: MutableSet<Roles> = mutableSetOf(),
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_localUsers", joinColumns = [JoinColumn(name = "user_id", referencedColumnName = "id")])
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL], mappedBy="user")
     var localUsers: MutableSet<LocalUserEntity> = mutableSetOf()
 
 )

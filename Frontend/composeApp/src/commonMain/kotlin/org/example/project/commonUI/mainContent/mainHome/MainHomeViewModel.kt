@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.example.project.data.models.LocalUserDto
 import org.example.project.database.UserSession
 import org.example.project.domain.repositories.UserRepository
 
@@ -18,7 +19,8 @@ interface MainHomeView{
 
 data class MainHomeUiState(
     val username: String = "",
-    val email: String = ""
+    val email: String = "",
+    val localUserList: List<LocalUserDto> = listOf<LocalUserDto>()
 )
 
 class MainHomeViewModel(
@@ -48,10 +50,12 @@ class MainHomeViewModel(
 
         viewModelScope.launch {
             val user = userRepository.getUser(userSession)
+            val localUserList = userRepository.getLocalUsers(userSession)
             _uiState.update { currentState ->
                 currentState.copy(
                     username = user.username,
-                    email = user.email
+                    email = user.email,
+                    localUserList = localUserList.list
                 )
             }
         }

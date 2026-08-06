@@ -1,6 +1,7 @@
 package org.example.project.domain.repositories
 
 import kotlinx.coroutines.flow.Flow
+import org.example.project.data.models.LocalUserListDto
 import org.example.project.data.models.UserUiDto
 import org.example.project.data.network.UserSessionNetworkApi
 import org.example.project.database.UserSession
@@ -14,6 +15,8 @@ interface UserRepository{
     suspend fun setUserToken(jwtToken: String)
 
     suspend fun getUser(userSession: UserSession?): UserUiDto
+
+    suspend fun getLocalUsers(userSession: UserSession?): LocalUserListDto
 }
 
 class UserRepositoryImpl (
@@ -39,6 +42,22 @@ class UserRepositoryImpl (
                     "",
                     ""
                 )
+            }
+        )
+    }
+
+    override suspend fun getLocalUsers(userSession: UserSession?): LocalUserListDto {
+        val result = userSessionNetworkApi.getLocalUsers(userSession)
+
+        return result.fold(
+            onSuccess = { localUserList ->
+                localUserList
+            },
+            onFailure = { error ->
+                LocalUserListDto(
+                    list = listOf()
+                )
+
             }
         )
     }
