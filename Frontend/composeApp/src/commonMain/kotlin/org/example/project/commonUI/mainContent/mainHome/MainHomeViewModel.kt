@@ -20,7 +20,7 @@ interface MainHomeView{
 data class MainHomeUiState(
     val username: String = "",
     val email: String = "",
-    val localUserList: List<LocalUserDto> = listOf<LocalUserDto>()
+    val localUserList: List<LocalUserDto> = listOf()
 )
 
 class MainHomeViewModel(
@@ -30,6 +30,7 @@ class MainHomeViewModel(
     private val _uiState = MutableStateFlow(MainHomeUiState())
     val uiState: StateFlow<MainHomeUiState> = _uiState.asStateFlow()
 
+    //Exposes DataStore flow as StateFlow for Compose
     val userSession: StateFlow<UserSession?> = userRepository.userSession
         .stateIn(
             scope = viewModelScope,
@@ -39,6 +40,7 @@ class MainHomeViewModel(
 
     init {
         println("MainHomeViewModel initialized")
+        getUser(userSession.value)
     }
 
     override fun onCleared() {
